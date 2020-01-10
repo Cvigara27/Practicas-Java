@@ -6,6 +6,8 @@ public class ejercicio6 {
 		int i;
 		int[] serie1=new int[12];
 		int[] serie2=new int[12];
+		int[] serie3=new int[24];
+		System.out.println("Leer dos series de numeros devolverlas en orden:1A,2A,3A,1B,2B,3B,4A...");
 		for (i=0; i<serie1.length; i++) {
 			System.out.print("Primera serie, escribe un número: ");
 			int numero=input.nextInt();
@@ -16,9 +18,20 @@ public class ejercicio6 {
 			int numero=input.nextInt();
 			serie2[i]=numero;
 		}
-		for (i=0; i<serie1.length; i++) {
-			System.out.println(serie1[i]+" "+serie1[i+1]+" "+serie1[i+2]);
-			System.out.println(serie2[i]+" "+serie2[i+1]+" "+serie2[i+2]);
+		int contar=0,inc=0;
+		while (inc<serie1.length) {
+			for (i=0; i<3;i++) {
+				serie3[contar]=serie1[i+inc];
+				contar++;
+			}
+			for (i=0; i<3;i++) {
+				serie3[contar]=serie2[i+inc];
+				contar++;
+			}
+			inc+=3;
+		}
+		for (i=0;  i<serie3.length; i++) {
+			System.out.print(serie3[i]+" ");
 		}
 		input.close();
 	}

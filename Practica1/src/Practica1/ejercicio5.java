@@ -6,6 +6,7 @@ public class ejercicio5 {
 		int i;
 		int[] serie1=new int[10];
 		int[] serie2=new int[10];
+		System.out.println("Leer dos series de numeros devolverlas en orden:1A,1B,2A,2B...");
 		for (i=0; i<serie1.length; i++) {
 			System.out.print("Primera serie, escribe un número: ");
 			int numero=input.nextInt();

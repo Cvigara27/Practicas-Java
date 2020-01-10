@@ -5,6 +5,7 @@ public class ejercicio2 {
 		Scanner input=new Scanner(System.in);
 		int i;
 		int[] numeros=new int[5];
+		System.out.println("Leer numeros y devolver en orden inverso");
 		for (i=0; i<numeros.length; i++) {
 			System.out.print("Introduzca un número: ");
 			int numero=input.nextInt();

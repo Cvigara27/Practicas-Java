@@ -5,6 +5,7 @@ public class ejercicio4 {
 		Scanner input=new Scanner(System.in);
 		int i;
 		int[] numeros=new int[10];
+		System.out.println("Leer numeros y devolverlo en orden:1º,Último,2º,Penúltimo...");
 		for (i=0; i<numeros.length; i++) {
 			System.out.print("Introduzca un número: ");
 			int numero=input.nextInt();
