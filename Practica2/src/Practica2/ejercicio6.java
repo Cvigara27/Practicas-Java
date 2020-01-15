@@ -22,7 +22,7 @@ public class ejercicio6 {
 		for (i=0; i<tabla.length; i++) {
 			System.out.println();
 			for (k=0; k<tabla[i].length; k++) {
-				System.out.print(tabla[i][k]+" ");
+				System.out.print(tabla[i][k]);
 			}
 		}
 	}
