@@ -2,6 +2,7 @@ package Practica2;
 import java.util.Scanner;
 public class ejercicio7 {
 	public void marcoDinamico() {
+		//Crear una matriz con dimensiones dadas por \nel usuario y que el marco sean 1
 		Scanner input=new Scanner(System.in);
 		System.out.println("Crear una matriz con dimensiones dadas por \nel usuario y que el marco sean 1");
 		System.out.println("Introduzca el numero de columnas");

@@ -1,6 +1,7 @@
 package Practica2;
 public class ejercicio6 {
 	public void marcoFijo() {
+		//Crear una matriz 8x6 y que el marco sean 1
 		int[][] tabla=new int[8][6];
 		int i,k;
 		System.out.println("Crear una matriz 8x6 y que el marco sean 1");

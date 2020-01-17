@@ -2,6 +2,7 @@ package Practica1;
 import java.util.Scanner;
 public class ejercicio6 {
 	public void alternar() {
+		//Leer dos series de numeros devolverlas en orden:1A,2A,3A,1B,2B,3B,4A...
 		Scanner input=new Scanner(System.in);
 		int i;
 		int[] serie1=new int[12];

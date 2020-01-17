@@ -2,6 +2,7 @@ package Practica1;
 import java.util.Scanner;
 public class ejercicio2 {
 	public void leerInverso(){
+		//Leer numeros y devolver en orden inverso
 		Scanner input=new Scanner(System.in);
 		int i;
 		int[] numeros=new int[5];

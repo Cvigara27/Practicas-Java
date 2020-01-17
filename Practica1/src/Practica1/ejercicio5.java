@@ -2,6 +2,7 @@ package Practica1;
 import java.util.Scanner;
 public class ejercicio5 {
 	public void mezclar() {
+		//Leer dos series de numeros devolverlas en orden:1A,1B,2A,2B...
 		Scanner input=new Scanner(System.in);
 		int i;
 		int[] serie1=new int[10];

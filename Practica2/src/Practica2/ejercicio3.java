@@ -2,8 +2,9 @@ package Practica2;
 import java.util.Scanner;
 public class ejercicio3 {
 	public void simetrica() {
+		//Crear una tabla 4x4 y decir si es simetrica(cambiar filas por columnas)
 		Scanner input=new Scanner(System.in);
-		System.out.println("Crear una tabla 4x4 y decir si es simetrica(cambiar filas por columnas");
+		System.out.println("Crear una tabla 4x4 y decir si es simetrica(cambiar filas por columnas)");
 		int[][] tabla=new int[4][4];
 		int i,k;
 		for (i=0; i<tabla.length; i++) {

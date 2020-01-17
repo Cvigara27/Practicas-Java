@@ -1,6 +1,7 @@
 package Practica2;
 public class ejercicio2 {
 	public void tablaIncremento() {
+		//Crear un tabla 5x5 donde T[n][m]=n+m
 		int[][] tabla=new int[5][5];
 		int i,k;
 		System.out.println("Crear un tabla 5x5 donde T[n][m]=n+m");

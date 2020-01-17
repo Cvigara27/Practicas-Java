@@ -1,6 +1,7 @@
 package Practica2;
 public class ejercicio5 {
 	public void crearDiagonal() {
+		//Crear una tabla 7x7, que la diagonal sea 1 y el resto 0
 		int[][] tabla=new int[7][7];
 		int i,k;
 		System.out.println("Crear una tabla 7x7, que la diagonal sea 1 y el resto 0");

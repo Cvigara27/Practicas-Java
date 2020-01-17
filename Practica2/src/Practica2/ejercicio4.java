@@ -2,6 +2,7 @@ package Practica2;
 import java.util.Scanner;
 public class ejercicio4 {
 	public void tablaSumar() {
+		//Tener 2 matrices de 3x3 y sumar los valores
 		Scanner input=new Scanner(System.in);
 		int[][] tabla1=new int[3][3];
 		int[][] tabla2=new int[3][3];

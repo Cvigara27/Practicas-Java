@@ -2,6 +2,7 @@ package Practica1;
 import java.util.Scanner;
 public class ejercicio3 {
 	public void medias(){
+		//Hacer media positivos,negativos y contar ceros
 		Scanner input=new Scanner(System.in);
 		int i;
 		int mediapos=0,contarpos=0,medianeg=0,contarneg=0,contarc=0;

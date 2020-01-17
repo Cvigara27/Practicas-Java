@@ -1,25 +1,23 @@
 package PracticaWeb;
-import java.util.Scanner;
+import javax.swing.JOptionPane;
 public class Main {
 	public static void main(String[] args) {
-		Scanner input=new Scanner(System.in);
-		ejercicio1 ej1=new ejercicio1();ejercicio2 ej2=new ejercicio2();
-		System.out.print("Que ejercicio quieres ver? ");
-		int opcion=input.nextInt();
+		ejercicios ejer=new ejercicios(); 
+		int opcion=Integer.parseInt(JOptionPane.showInputDialog("Que ejercicio quieres ver? "));
 		switch(opcion) {
-			case 1:ej1.operaciones();break;
-			case 2:ej2.mayorMenor();break;
-			case 3:
-			case 4:
-			case 5:
-			case 6:
-			case 7:
-			case 8:
-			case 9:
-			case 10:
-			case 11:
-			case 12:
-			case 13:
+			case 1: ejer.operaciones(); break;
+			case 2: ejer.mayorMenor(); break;
+			case 3: ejer.saludar(); break;
+			case 4: ejer.jpane(); break;
+			case 5: ejer.radio(); break;
+			case 6: ejer.divide(); break;
+			case 7: ejer.ascii(); break;
+			case 8: ejer.ascii2(); break;
+			case 9: ejer.iva(); break;
+			case 10: ejer.unoA100(); break;
+			case 11: ejer.unoA100FOR(); break;
+			case 12: ejer.unoA100Divide(); break;
+			case 13: ejer.ventas(); break;
 			case 14:
 			case 15:
 			case 16:
@@ -30,8 +28,7 @@ public class Main {
 			case 21:
 			case 22:
 			case 23:
-			case 24:
-				
+			case 24:		
 		}
 	}
 

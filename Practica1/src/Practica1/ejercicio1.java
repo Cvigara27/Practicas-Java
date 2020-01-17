@@ -2,6 +2,7 @@ package Practica1;
 import java.util.Scanner;
 public class ejercicio1 {
 	public void leer(){
+		//Leer numeros y devolver en el mismo orden
 		Scanner input=new Scanner(System.in);
 		int i;
 		int[] numeros=new int[5];
