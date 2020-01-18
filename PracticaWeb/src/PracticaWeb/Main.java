@@ -18,17 +18,28 @@ public class Main {
 			case 11: ejer.unoA100FOR(); break;
 			case 12: ejer.unoA100Divide(); break;
 			case 13: ejer.ventas(); break;
-			case 14:
-			case 15:
-			case 16:
-			case 17:
-			case 18:
-			case 19:
-			case 20:
-			case 21:
-			case 22:
-			case 23:
-			case 24:		
+			case 14: ejer.ecuacion(); break;
+			case 15: ejer.doWhile(); break;
+			case 16: ejer.passw(); break;
+			case 17: ejer.diasSemana(); break;
+			case 18: ejer.random(); break;
+			case 19: ejer.contarCifras(); break;
+			case 20: ejer.primos(); break;
+			case 21: ejer.primos1a100(); break;
+			case 22: ejer.contarVocales(); break;
+			case 23: ejer.cambiarVocales(); break;
+			case 24: ejer.devolverASCII(); break;
+			case 25: ejer.calculadora(); break;
+			case 26: ejer.sumador(); break;
+			case 27: ejer.contarInputs(); break;
+			case 28: ejer.eliminarEspacio(); break;
+			case 29: ejer.concatenar(); break;
+			case 30: ejer.upperLower(); break;
+			case 31: ejer.fraseLength(); break;
+			case 32: ejer.igual(); break;
+			case 33: ejer.substring(); break;
+			case 34: ejer.separa(); break;
+			case 35: ejer.enumDias(); break;
 		}
 	}
 
