@@ -8,7 +8,6 @@ public class Persona {
 	private Nif infoNif=new Nif();
 
 	public Persona(String nombre, String primerApellido, String segundoApellido, int edad, Nif infoNif) {
-		super();
 		this.setNombre(nombre);
 		this.setPrimerApellido(primerApellido);
 		this.setSegundoApellido(segundoApellido);
@@ -21,7 +20,6 @@ public class Persona {
 	}
 	
 	public Persona(Persona pers1) {
-		super();
 		this.nombre = pers1.nombre;
 		this.primerApellido = pers1.primerApellido;
 		this.segundoApellido = pers1.segundoApellido;
