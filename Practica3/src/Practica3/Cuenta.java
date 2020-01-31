@@ -1,28 +1,45 @@
 package Practica3;
+import java.util.ArrayList;
 import java.util.Scanner;
 public class Cuenta {
 	private String nombre;
 	private String numCuenta;
-	private double tipoInteres;
 	private double saldo;
+	private String usuario;
+	private String contraseña;
 	static Scanner input=new Scanner(System.in);
 	
-	public Cuenta(String nombre, String numCuenta, double tipoInteres, double saldo) {
+	public Cuenta(String nombre, String numCuenta, double saldo, String usuario, String contraseña, ArrayList<Cuenta> lista) {
 		this.setNombre(nombre);
 		this.setNumCuenta(numCuenta);
-		this.setTipoInteres(tipoInteres);
 		this.setSaldo(saldo);
+		this.setUsuario(usuario);
+		this.setContraseña(contraseña);
+		lista.add(this);
+	}
+	
+	public Cuenta(String nombre, String numCuenta, double saldo, String usuario, String contraseña) {
+		this.setNombre(nombre);
+		this.setNumCuenta(numCuenta);
+		this.setSaldo(saldo);
+		this.setUsuario(usuario);
+		this.setContraseña(contraseña);
 	}
 
-	public Cuenta() {
-		
+	public String getUsuario() {
+		return usuario;
 	}
 
-	public Cuenta(Cuenta c1) {
-		this.setNombre(c1.nombre);
-		this.setNumCuenta(c1.numCuenta);
-		this.setTipoInteres(c1.tipoInteres);
-		this.setSaldo(c1.saldo);
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getContraseña() {
+		return contraseña;
+	}
+
+	public void setContraseña(String contraseña) {
+		this.contraseña = contraseña;
 	}
 
 	public String getNombre() {
@@ -41,14 +58,6 @@ public class Cuenta {
 		this.numCuenta = numCuenta;
 	}
 
-	public double getTipoInteres() {
-		return tipoInteres;
-	}
-
-	public void setTipoInteres(double tipoInteres) {
-		this.tipoInteres = tipoInteres;
-	}
-
 	public double getSaldo() {
 		return saldo;
 	}
@@ -57,15 +66,6 @@ public class Cuenta {
 		this.saldo = saldo;
 	}
 	
-	public void crearCuenta() {
-		System.out.print("Escribe tu nombre: ");
-		this.setNombre(input.nextLine());
-		System.out.print("Esribe el numero de cuenta: ");
-		this.setNumCuenta(input.nextLine());
-		System.out.print("Escribe tu interes: ");
-		this.setTipoInteres(input.nextDouble());
-		this.setSaldo(0);
-	}
 	
 	public boolean ingresar() {
 		boolean comprobar=false;
@@ -92,4 +92,34 @@ public class Cuenta {
 		}
 		return comprobar;
 	}
+	
+	public void añadirPersona(ArrayList<Cuenta> lista) {
+		boolean comprobar=true;
+		int i=0;
+		while(i<lista.size() && comprobar==true){
+			System.out.print("Escribe tu usuario: ");
+			String usuario=input.nextLine();
+			if(usuario.equals(lista.get(i).getUsuario())) {
+				System.out.println("Nombre de usuario ya registrado");
+				comprobar=false;
+			}
+			i++;
+		}
+		System.out.print("Escribe tu contraseña: ");
+		String contraseña=input.nextLine();
+		System.out.print("Escribe tu nombre: ");
+		String nombre=input.nextLine();
+		String cuenta=Integer.toString(lista.size());
+		System.out.println("Quieres hacer un ingrso inicial? [Y/N]");
+		String inicial=input.nextLine().toUpperCase();
+		if (inicial=="Y") {
+			System.out.print("Cuanto vas a ingresar? ");
+			double saldo=input.nextDouble();
+		} else {
+			double saldo=0;
+		}
+		Cuenta persona=new Cuenta(nombre,cuenta,saldo,usuario,contraseña);
+		lista.add(persona);
+	}
+	
 }

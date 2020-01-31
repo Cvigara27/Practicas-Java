@@ -1,35 +1,49 @@
 package Practica3;
+import java.util.ArrayList;
 import java.util.Scanner;
 public class Main {
+	static Scanner input=new Scanner(System.in);
 	public static void main(String[] args) {
-		boolean menu=true;
-		Cuenta c1=new Cuenta();
-		Cuenta c2=new Cuenta();
-		System.out.println("Primero hay que crear las cuentas");
-		c1.crearCuenta();
-		System.out.println();
-		System.out.println("Esta es la segunda cuenta");
-		c2.crearCuenta();
-		System.out.println();
-		public void menu() {
-			while(menu==true) {
-				Scanner input=new Scanner(System.in);
-				System.out.println("---------- Cajero Automatico ----------");
-				System.out.println("|                                     |");
-				System.out.println("|   1) Ingresar dinero                |");
-				System.out.println("|   2) Retirar dinero                 |");
-				System.out.println("|   3) Realizar una trasnferencia     |");
-				System.out.println("|   4) Salir                          |");
-				System.out.println("|                                     |");
-				System.out.println("---------------------------------------");
+		ArrayList<Cuenta> cuentas=new ArrayList<Cuenta>();
+		Cuenta admin=new Cuenta("Cristian","0",696969,"admin","1234",cuentas);
+		boolean login=false;
+		while (login==false) {
+			boolean user=false;boolean passw=false;
+			int count=0;
+			while (user==false && count<3) {
 				System.out.println();
-				System.out.print("Que operación deseas hacer? ");
-				int opcion=input.nextInt();
-				switch(opcion) {
-					case 1:
-						
+				System.out.print("Usuario: ");
+				String usuario=input.nextLine();
+				int i;
+				for (i=0; i<cuentas.size(); i++) {
+					if (usuario.equals(cuentas.get(i).getUsuario())) {
+						user=true;
+					}
 				}
 			}
+		}	
+	}
+	public void cajero() {
+		boolean menu=true;
+		System.out.println();
+		while(menu==true) {
+			System.out.println();
+			System.out.println("---------- Cajero Automatico ----------");
+			System.out.println("|                                     |");
+			System.out.println("|   1) Ingresar dinero                |");
+			System.out.println("|   2) Retirar dinero                 |");
+			System.out.println("|   3) Realizar una trasnferencia     |");
+			System.out.println("|   4) Ver todos las cuentas          |");
+			System.out.println("|   5) Salir                          |");
+			System.out.println("|                                     |");
+			System.out.println("---------------------------------------");
+			System.out.println();
+			System.out.print("Que operación deseas hacer? ");
+			int opcion=input.nextInt();
+				
+			}
+		input.close();
 		}
+	
 }
-}
+
