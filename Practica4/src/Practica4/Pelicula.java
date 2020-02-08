@@ -113,19 +113,43 @@ public class Pelicula {
 		this.cantidadPelis = cantidadPelis;
 	}
 	
+	public void getTodo(ArrayList <Pelicula> videoclub,int i) {
+		
+	}
+	
+	
+	public String ponerMayus(String cadena) {
+		int i;
+		cadena.toLowerCase();
+		String[] uppers=cadena.split(" ");
+		for (i=0; i<uppers.length; i++) {
+			if(uppers[i]==("l" )) {
+				
+			}
+			String mayus=uppers[i].substring(0,1).toUpperCase();
+			mayus=mayus+uppers[i].substring(1);
+			uppers[i]=mayus;
+		}
+		String chain="";
+		for (i=0; i<uppers.length; i++) {
+			chain+=uppers[i]+" ";
+		}
+		return chain;
+	}
+	
 	public void añadirPelicula(ArrayList <Pelicula> videoclub) {
 		Scanner input=new Scanner(System.in);
-		if (copiasTotal>=capacidad) {
+		if (cantidadPelis>=capacidad) {
 			System.out.println("!ERROR¡ El videoclub no puede almacenar más películas");
 		} else {
 			System.out.print("Introduzca el titulo de la pelicula: ");
-			String title=input.nextLine();
+			String title=ponerMayus(input.nextLine());
 			System.out.print("Introduzca el director: ");
-			String direc=input.nextLine();
+			String direc=ponerMayus(input.nextLine());
 			System.out.print("Introduzca la duración en minutos: ");
 			int duracion=Integer.parseInt(input.nextLine());
 			System.out.print("Introduzca el genero: ");
-			String genre=input.nextLine();
+			String genre=ponerMayus(input.nextLine());
 			System.out.print("Introduzca el año de estreno: ");
 			int year=input.nextInt();
 			System.out.print("Introduzca el numero de copias: ");
@@ -136,43 +160,207 @@ public class Pelicula {
 				Pelicula peli=new Pelicula(id,title,direc,duracion,genre,year,true,amount,0);
 				videoclub.add(peli);
 				id++;
+				cantidadPelis+=amount;
 			}
 		}
 	}
 	
-	public void listarPeliculas(ArrayList <Pelicula> videoclub) {
-		int i;
-		for (i=0; i<videoclub.size(); i++) {
+	public void listarPelicula(ArrayList <Pelicula> videoclub,int i,boolean check) {
+		if (check==true) {
 			System.out.println("ID: "+videoclub.get(i).getId()+"   Titulo: "+videoclub.get(i).getTitulo()+"   Director: "+videoclub.get(i).getDirector());
-			System.out.println("Duracion: "+videoclub.get(i).getDuracion()+" minutos   Genero: "+videoclub.get(i).getGenero()+"   Año de estreno: "+videoclub.get(i).getAño());
+			System.out.println("Duracion: "+videoclub.get(i).getDuracion()+" minutos   Genero: "+videoclub.get(i).getGenero());
 			if(videoclub.get(i).getDisponibilidad()==true){
-				System.out.println("Estado: Disponible");
+				System.out.println("Año de estreno: "+videoclub.get(i).getAño()+"   Estado: Disponible");
 			} else if (videoclub.get(i).getDisponibilidad()==false){
-				System.out.println("Estado: No disponible");
+				System.out.println("Año de estreno: "+videoclub.get(i).getAño()+"   Estado: No disponible");
 			}
 			System.out.println();
+		}else {for (i=0; i<videoclub.size(); i++) {
+				System.out.println("ID: "+videoclub.get(i).getId()+"   Titulo: "+videoclub.get(i).getTitulo()+"   Director: "+videoclub.get(i).getDirector());
+				System.out.println("Duracion: "+videoclub.get(i).getDuracion()+" minutos   Genero: "+videoclub.get(i).getGenero());
+				if(videoclub.get(i).getDisponibilidad()==true){
+					System.out.println("Año de estreno: "+videoclub.get(i).getAño()+"   Estado: Disponible");
+				} else if (videoclub.get(i).getDisponibilidad()==false){
+					System.out.println("Año de estreno: "+videoclub.get(i).getAño()+"   Estado: No disponible");
+				}
+				System.out.println();
+			}
 		}
 	}
 	
 	public void reservarPelicula(ArrayList <Pelicula> videoclub) {
 		Scanner input=new Scanner(System.in);
-		listarPeliculas(videoclub);
-		System.out.print("¿Qué pelicula quieres reservar(ID)? ");
-		int opcion=input.nextInt();
-		if(opcion>videoclub.size()) {
-			System.out.println("La película seleccionada no existe");
-		} else if(videoclub.get(opcion-1).getDisponibilidad()==false) {
-			System.out.println("La pelicula no esta disponible");
-		} else if (videoclub.get(opcion-1).getDisponibilidad()==true) {
-			System.out.println("Se ha reservado su pelicula");
-			int num=videoclub.get(opcion-1).getCopiaReservada();
-			num+=1;
-			videoclub.get(opcion-1).setCopiaReservada(num);
-			if(videoclub.get(opcion-1).getCopiaReservada()==videoclub.get(opcion-1).getCopiasTotal()) {
-				videoclub.get(opcion-1).setDisponibilidad(false);
+		if(videoclub.size()==0) {
+			System.out.println("No hay ninguna pelicula en el videoclub");
+		}else {
+			System.out.println("===========================");
+			System.out.println("|   Lista de peliculas    |");
+			System.out.println("===========================");
+			listarPelicula(videoclub,0,false);
+			System.out.print("¿Qué pelicula quieres reservar(ID)? ");
+			int opcion=input.nextInt();
+			if(opcion>videoclub.size()) {
+				System.out.println("La película seleccionada no existe");
+			} else if(videoclub.get(opcion-1).getDisponibilidad()==false) {
+				System.out.println("La pelicula no esta disponible");
+			} else if (videoclub.get(opcion-1).getDisponibilidad()==true) {
+				System.out.println("Se ha reservado su pelicula");
+				int num=videoclub.get(opcion-1).getCopiaReservada();
+				num+=1;
+				videoclub.get(opcion-1).setCopiaReservada(num);
+				if(videoclub.get(opcion-1).getCopiaReservada()==videoclub.get(opcion-1).getCopiasTotal()) {
+					videoclub.get(opcion-1).setDisponibilidad(false);
+				}
+			} else if(opcion>=videoclub.size()) {
+				System.out.println("La película seleccionada no existe");
 			}
-		} else if(opcion>=videoclub.size()) {
-			System.out.println("La película seleccionada no existe");
+		}
+	}
+	
+	public void buscarPelicula(ArrayList <Pelicula> videoclub) {
+		Scanner input=new Scanner(System.in);
+		int i;
+		boolean comprobar=false;
+		if(videoclub.size()==0) {
+			System.out.println("No hay ninguna pelicula en el videoclub");
+		}else {
+			System.out.println();
+			System.out.println("  1) Por título");
+			System.out.println("  2) Por director");
+			System.out.println("  3) Por género");
+			System.out.println("  4) Por año");
+			System.out.println("  5) Por duración");
+			System.out.print("¿Qué tipo de busqueda quieres realizar? ");
+			int opcion=Integer.parseInt(input.nextLine());
+			switch(opcion) {
+				case 1:
+					System.out.print("¿Qué título quieres buscar? ");
+					String titulo=input.nextLine().toLowerCase();
+					System.out.println("===========================");
+					System.out.println("|   Lista de peliculas    |");
+					System.out.println("===========================");
+					for(i=0; i<videoclub.size(); i++) {
+						if(videoclub.get(i).getTitulo().toLowerCase().contains(titulo)) {
+							listarPelicula(videoclub,i,true);
+							comprobar=true;
+						}
+					}
+					if (comprobar==false) {
+						System.out.println("No se ha encontrado ninguna coincidencia");
+					};break;
+				case 2:
+					System.out.print("¿Qué director quieres buscar? ");
+					String direc=input.nextLine().toLowerCase();
+					System.out.println("===========================");
+					System.out.println("|   Lista de peliculas    |");
+					System.out.println("===========================");
+					for(i=0; i<videoclub.size(); i++) {
+						if(videoclub.get(i).getDirector().toLowerCase().contains(direc)) {
+							listarPelicula(videoclub,i,true);
+							comprobar=true;
+						}
+					}
+					if (comprobar==false) {
+						System.out.println("No se ha encontrado ninguna coincidencia");
+					};break;
+				case 3:
+					System.out.print("¿Qué género quieres buscar? ");
+					String genre=input.nextLine().toLowerCase();
+					System.out.println("===========================");
+					System.out.println("|   Lista de peliculas    |");
+					System.out.println("===========================");
+					for(i=0; i<videoclub.size(); i++) {
+						if(videoclub.get(i).getGenero().toLowerCase().contains(genre)) {
+							listarPelicula(videoclub,i,true);
+							comprobar=true;
+						}
+					}
+					if (comprobar==false) {
+						System.out.println("No se ha encontrado ninguna coincidencia");
+					};break;
+				case 4:
+					System.out.print("¿Qué año quieres buscar? ");
+					int year=input.nextInt();
+					mayorMenor(year,videoclub,true);break;
+				case 5:
+					System.out.print("¿Qué duración quieres buscar(minutos)? ");
+					int time=input.nextInt();
+					mayorMenor(time,videoclub,false);break;
+			}
+		}
+	}
+	
+	public void mayorMenor(int opcion,ArrayList <Pelicula> videoclub,boolean añoTime) {
+		Scanner input=new Scanner(System.in);
+		int i;
+		boolean comprobar=false;
+		System.out.println();
+		System.out.println("  1) Mayor que...");
+		System.out.println("  2) Cantidad exacta");
+		System.out.println("  3) Menor que...");
+		System.out.print("¿Qué tipo de busqueda prefieres? ");
+		int eleccion=input.nextInt();
+		switch(eleccion){
+			case 1:
+				System.out.println("===========================");
+				System.out.println("|   Lista de peliculas    |");
+				System.out.println("===========================");
+				for(i=0; i<videoclub.size(); i++) {
+					if (añoTime==true) {
+						if(videoclub.get(i).getAño()>=opcion) {
+							listarPelicula(videoclub,i,true);
+							comprobar=true;
+						}
+					} else {
+						if(videoclub.get(i).getDuracion()>=opcion) {
+							listarPelicula(videoclub,i,true);
+							comprobar=true;
+						}
+					}
+				}
+				if (comprobar==false) {
+					System.out.println("No se ha encontrado ninguna coincidencia");
+				};break;
+			case 2:
+				System.out.println("===========================");
+				System.out.println("|   Lista de peliculas    |");
+				System.out.println("===========================");
+				for(i=0; i<videoclub.size(); i++) {
+					if (añoTime==true) {
+						if(videoclub.get(i).getAño()==opcion) {
+							listarPelicula(videoclub,i,true);
+							comprobar=true;
+						}
+					} else {
+						if(videoclub.get(i).getDuracion()==opcion) {
+							listarPelicula(videoclub,i,true);
+							comprobar=true;
+						}
+					}
+				}
+				if (comprobar==false) {
+					System.out.println("No se ha encontrado ninguna coincidencia");
+				};break;
+			case 3:
+				System.out.println("===========================");
+				System.out.println("|   Lista de peliculas    |");
+				System.out.println("===========================");
+				for(i=0; i<videoclub.size(); i++) {
+					if (añoTime==true) {
+						if(videoclub.get(i).getAño()<=opcion) {
+							listarPelicula(videoclub,i,true);
+							comprobar=true;
+						}
+					} else {
+						if(videoclub.get(i).getDuracion()<=opcion) {
+							listarPelicula(videoclub,i,true);
+							comprobar=true;
+						}
+					}
+				}
+				if (comprobar==false) {
+					System.out.println("No se ha encontrado ninguna coincidencia");
+				};break;
 		}
 	}
 }

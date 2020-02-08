@@ -23,7 +23,8 @@ public class Main {
 			switch(opcion) {
 				case 1:obj.añadirPelicula(videoclub);break;
 				case 2:obj.reservarPelicula(videoclub);break;
-				case 3:obj.listarPeliculas(videoclub);break;
+				case 3:obj.buscarPelicula(videoclub);break;
+				case 4:menu=false;
 			}
 		}
 	}
