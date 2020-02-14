@@ -6,11 +6,10 @@ public class Main {
 	public static void main(String[] args) {
 		ArrayList<Cuenta> cuentas=new ArrayList<Cuenta>();
 		Cuenta admin=new Cuenta("Cristian","0",696969,"1234",cuentas);
-		Cuenta admin2=new Cuenta("Don Kakas","1",2,"1234",cuentas);
 		boolean main=true;
 		String noFunciona="SALIR";
-		System.out.println("Para salir del Login escribe SALIR");
 		while (main==true) {
+			System.out.println("Para salir del Login escribe SALIR");
 			boolean login=false;
 			while (login==false) {
 				boolean account=false;boolean passw=false;

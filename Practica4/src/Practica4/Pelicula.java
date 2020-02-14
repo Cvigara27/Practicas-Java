@@ -1,5 +1,6 @@
 package Practica4;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 public class Pelicula {
 	private int id=1;
@@ -113,11 +114,6 @@ public class Pelicula {
 		this.cantidadPelis = cantidadPelis;
 	}
 	
-	public void getTodo(ArrayList <Pelicula> videoclub,int i) {
-		
-	}
-	
-	
 	public String ponerMayus(String cadena) {
 		int i;
 		cadena.toLowerCase();
@@ -163,10 +159,26 @@ public class Pelicula {
 				cantidadPelis+=amount;
 			}
 		}
+		input.close();
 	}
 	
-	public void listarPelicula(ArrayList <Pelicula> videoclub,int i,boolean check) {
-		if (check==true) {
+	public void listarPelicula(ArrayList <Pelicula> videoclub,int i) {
+		System.out.println("ID: "+videoclub.get(i).getId()+"   Titulo: "+videoclub.get(i).getTitulo()+"   Director: "+videoclub.get(i).getDirector());
+		System.out.println("Duracion: "+videoclub.get(i).getDuracion()+" minutos   Genero: "+videoclub.get(i).getGenero());
+		if(videoclub.get(i).getDisponibilidad()==true){
+			System.out.println("Año de estreno: "+videoclub.get(i).getAño()+"   Estado: Disponible");
+		} else if (videoclub.get(i).getDisponibilidad()==false){
+			System.out.println("Año de estreno: "+videoclub.get(i).getAño()+"   Estado: No disponible");
+		}
+		System.out.println();
+	}
+	
+	public void listarTodas(ArrayList <Pelicula> videoclub) {
+		System.out.println("===========================");
+		System.out.println("|   Lista de peliculas    |");
+		System.out.println("===========================");
+		int i;
+		for (i=0; i<videoclub.size(); i++) {
 			System.out.println("ID: "+videoclub.get(i).getId()+"   Titulo: "+videoclub.get(i).getTitulo()+"   Director: "+videoclub.get(i).getDirector());
 			System.out.println("Duracion: "+videoclub.get(i).getDuracion()+" minutos   Genero: "+videoclub.get(i).getGenero());
 			if(videoclub.get(i).getDisponibilidad()==true){
@@ -175,28 +187,15 @@ public class Pelicula {
 				System.out.println("Año de estreno: "+videoclub.get(i).getAño()+"   Estado: No disponible");
 			}
 			System.out.println();
-		}else {for (i=0; i<videoclub.size(); i++) {
-				System.out.println("ID: "+videoclub.get(i).getId()+"   Titulo: "+videoclub.get(i).getTitulo()+"   Director: "+videoclub.get(i).getDirector());
-				System.out.println("Duracion: "+videoclub.get(i).getDuracion()+" minutos   Genero: "+videoclub.get(i).getGenero());
-				if(videoclub.get(i).getDisponibilidad()==true){
-					System.out.println("Año de estreno: "+videoclub.get(i).getAño()+"   Estado: Disponible");
-				} else if (videoclub.get(i).getDisponibilidad()==false){
-					System.out.println("Año de estreno: "+videoclub.get(i).getAño()+"   Estado: No disponible");
-				}
-				System.out.println();
-			}
 		}
 	}
 	
-	public void reservarPelicula(ArrayList <Pelicula> videoclub) {
+	public void reservarPelicula(ArrayList <Pelicula> videoclub,HashMap <String, String> reservas,String nombre) {
 		Scanner input=new Scanner(System.in);
 		if(videoclub.size()==0) {
 			System.out.println("No hay ninguna pelicula en el videoclub");
 		}else {
-			System.out.println("===========================");
-			System.out.println("|   Lista de peliculas    |");
-			System.out.println("===========================");
-			listarPelicula(videoclub,0,false);
+			listarTodas(videoclub);
 			System.out.print("¿Qué pelicula quieres reservar(ID)? ");
 			int opcion=input.nextInt();
 			if(opcion>videoclub.size()) {
@@ -211,12 +210,17 @@ public class Pelicula {
 				if(videoclub.get(opcion-1).getCopiaReservada()==videoclub.get(opcion-1).getCopiasTotal()) {
 					videoclub.get(opcion-1).setDisponibilidad(false);
 				}
-			} else if(opcion>=videoclub.size()) {
-				System.out.println("La película seleccionada no existe");
+				if (reservas.containsKey(nombre)) {
+					String newValue=reservas.get(nombre)+", "+videoclub.get(opcion-1).getTitulo();
+					reservas.put(nombre, newValue);
+				} else {
+					reservas.put(nombre, videoclub.get(opcion-1).getTitulo());
+				}				
 			}
 		}
+		input.close();
 	}
-	
+		
 	public void buscarPelicula(ArrayList <Pelicula> videoclub) {
 		Scanner input=new Scanner(System.in);
 		int i;
@@ -241,7 +245,7 @@ public class Pelicula {
 					System.out.println("===========================");
 					for(i=0; i<videoclub.size(); i++) {
 						if(videoclub.get(i).getTitulo().toLowerCase().contains(titulo)) {
-							listarPelicula(videoclub,i,true);
+							listarPelicula(videoclub,i);
 							comprobar=true;
 						}
 					}
@@ -256,7 +260,7 @@ public class Pelicula {
 					System.out.println("===========================");
 					for(i=0; i<videoclub.size(); i++) {
 						if(videoclub.get(i).getDirector().toLowerCase().contains(direc)) {
-							listarPelicula(videoclub,i,true);
+							listarPelicula(videoclub,i);
 							comprobar=true;
 						}
 					}
@@ -271,7 +275,7 @@ public class Pelicula {
 					System.out.println("===========================");
 					for(i=0; i<videoclub.size(); i++) {
 						if(videoclub.get(i).getGenero().toLowerCase().contains(genre)) {
-							listarPelicula(videoclub,i,true);
+							listarPelicula(videoclub,i);
 							comprobar=true;
 						}
 					}
@@ -288,6 +292,7 @@ public class Pelicula {
 					mayorMenor(time,videoclub,false);break;
 			}
 		}
+		input.close();
 	}
 	
 	public void mayorMenor(int opcion,ArrayList <Pelicula> videoclub,boolean añoTime) {
@@ -308,12 +313,12 @@ public class Pelicula {
 				for(i=0; i<videoclub.size(); i++) {
 					if (añoTime==true) {
 						if(videoclub.get(i).getAño()>=opcion) {
-							listarPelicula(videoclub,i,true);
+							listarPelicula(videoclub,i);
 							comprobar=true;
 						}
 					} else {
 						if(videoclub.get(i).getDuracion()>=opcion) {
-							listarPelicula(videoclub,i,true);
+							listarPelicula(videoclub,i);
 							comprobar=true;
 						}
 					}
@@ -328,12 +333,12 @@ public class Pelicula {
 				for(i=0; i<videoclub.size(); i++) {
 					if (añoTime==true) {
 						if(videoclub.get(i).getAño()==opcion) {
-							listarPelicula(videoclub,i,true);
+							listarPelicula(videoclub,i);
 							comprobar=true;
 						}
 					} else {
 						if(videoclub.get(i).getDuracion()==opcion) {
-							listarPelicula(videoclub,i,true);
+							listarPelicula(videoclub,i);
 							comprobar=true;
 						}
 					}
@@ -348,12 +353,12 @@ public class Pelicula {
 				for(i=0; i<videoclub.size(); i++) {
 					if (añoTime==true) {
 						if(videoclub.get(i).getAño()<=opcion) {
-							listarPelicula(videoclub,i,true);
+							listarPelicula(videoclub,i);
 							comprobar=true;
 						}
 					} else {
 						if(videoclub.get(i).getDuracion()<=opcion) {
-							listarPelicula(videoclub,i,true);
+							listarPelicula(videoclub,i);
 							comprobar=true;
 						}
 					}
@@ -361,6 +366,62 @@ public class Pelicula {
 				if (comprobar==false) {
 					System.out.println("No se ha encontrado ninguna coincidencia");
 				};break;
+		}
+		input.close();
+	}
+	
+	public void listarMiembro(ArrayList <Socio> miembros) {
+		int i;
+		System.out.println("===========================");
+		System.out.println("|     Lista de socios     |");
+		System.out.println("===========================");
+		for (i=0; i<miembros.size(); i++) {
+			System.out.println("Nombre: "+miembros.get(i).getNombre());
+		}
+	}
+	
+	public void mostrarReservaCliente(HashMap <String,String> reservas,String nombre) {
+		if (reservas.containsKey(nombre)==false) {
+			System.out.println("El cliente no tiene ninguna reserva");
+		} else {
+			System.out.println("El socio "+nombre+" tiene reservadas:");
+			reservas.get(nombre);
+		}
+	}
+	
+	public void mostrarReservaPelicula(HashMap <String,String> reservas,int titulo,ArrayList <Pelicula> videoclub) {
+		boolean comprobar=false;
+		for (String i : reservas.keySet()) {
+			if (reservas.get(i).contains(videoclub.get(titulo).getTitulo())) {
+				System.out.println(i);
+				comprobar=true;
+			}
+		}
+		if (comprobar==false) {
+			System.out.println("Esta pelicula no esta reservada");
+		}
+	}
+	
+	public void verReserva(HashMap <String,String> reservas,ArrayList <Pelicula> videoclub,ArrayList <Socio> miembros) {
+		Scanner input=new Scanner(System.in);
+		System.out.println();
+		System.out.println("  1) Buscar por socio");
+		System.out.println("  2) Buscar por pelicula");
+		System.out.print("¿Qué tipo de busqueda quieres realizar? ");
+		int opcion=input.nextInt();
+		switch(opcion) {
+			case 1:
+				System.out.println();
+				listarMiembro(miembros);
+				System.out.print("¿Qué miembro quieres comprobar si tiene reservas?(Precaución: Key Sensitive) ");
+				String nombre=input.nextLine();
+				mostrarReservaCliente(reservas,nombre);break;
+			case 2:
+				System.out.println();
+				listarTodas(videoclub);
+				System.out.print("¿Qué pelicula quieres comprobar si tiene reservas? ");
+				int titulo=input.nextInt();
+				mostrarReservaPelicula(reservas,titulo,videoclub);	
 		}
 	}
 }
