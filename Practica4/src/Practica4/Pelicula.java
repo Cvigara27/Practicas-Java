@@ -14,6 +14,7 @@ public class Pelicula {
 	private int copiaReservada;
 	private int cantidadPelis=0;
 	final int capacidad=3000;
+	static Scanner input=new Scanner(System.in);
 	
 	public Pelicula(int id, String titulo, String director, int duracion, String genero, int año,boolean disponibilidad,int copiasTotal,int copiaReservada) {
 		this.setId(id);
@@ -134,7 +135,6 @@ public class Pelicula {
 	}
 	
 	public void añadirPelicula(ArrayList <Pelicula> videoclub) {
-		Scanner input=new Scanner(System.in);
 		if (cantidadPelis>=capacidad) {
 			System.out.println("!ERROR¡ El videoclub no puede almacenar más películas");
 		} else {
@@ -159,7 +159,6 @@ public class Pelicula {
 				cantidadPelis+=amount;
 			}
 		}
-		input.close();
 	}
 	
 	public void listarPelicula(ArrayList <Pelicula> videoclub,int i) {
@@ -191,7 +190,6 @@ public class Pelicula {
 	}
 	
 	public void reservarPelicula(ArrayList <Pelicula> videoclub,HashMap <String, String> reservas,String nombre) {
-		Scanner input=new Scanner(System.in);
 		if(videoclub.size()==0) {
 			System.out.println("No hay ninguna pelicula en el videoclub");
 		}else {
@@ -218,11 +216,9 @@ public class Pelicula {
 				}				
 			}
 		}
-		input.close();
 	}
 		
 	public void buscarPelicula(ArrayList <Pelicula> videoclub) {
-		Scanner input=new Scanner(System.in);
 		int i;
 		boolean comprobar=false;
 		if(videoclub.size()==0) {
@@ -235,7 +231,8 @@ public class Pelicula {
 			System.out.println("  4) Por año");
 			System.out.println("  5) Por duración");
 			System.out.print("¿Qué tipo de busqueda quieres realizar? ");
-			int opcion=Integer.parseInt(input.nextLine());
+			int opcion=input.nextInt();
+			input.nextLine();
 			switch(opcion) {
 				case 1:
 					System.out.print("¿Qué título quieres buscar? ");
@@ -292,11 +289,9 @@ public class Pelicula {
 					mayorMenor(time,videoclub,false);break;
 			}
 		}
-		input.close();
 	}
 	
 	public void mayorMenor(int opcion,ArrayList <Pelicula> videoclub,boolean añoTime) {
-		Scanner input=new Scanner(System.in);
 		int i;
 		boolean comprobar=false;
 		System.out.println();
@@ -305,6 +300,7 @@ public class Pelicula {
 		System.out.println("  3) Menor que...");
 		System.out.print("¿Qué tipo de busqueda prefieres? ");
 		int eleccion=input.nextInt();
+		input.nextLine();
 		switch(eleccion){
 			case 1:
 				System.out.println("===========================");
@@ -367,7 +363,6 @@ public class Pelicula {
 					System.out.println("No se ha encontrado ninguna coincidencia");
 				};break;
 		}
-		input.close();
 	}
 	
 	public void listarMiembro(ArrayList <Socio> miembros) {
@@ -385,43 +380,47 @@ public class Pelicula {
 			System.out.println("El cliente no tiene ninguna reserva");
 		} else {
 			System.out.println("El socio "+nombre+" tiene reservadas:");
-			reservas.get(nombre);
+			System.out.println(reservas.get(nombre));
 		}
 	}
 	
 	public void mostrarReservaPelicula(HashMap <String,String> reservas,int titulo,ArrayList <Pelicula> videoclub) {
 		boolean comprobar=false;
 		for (String i : reservas.keySet()) {
-			if (reservas.get(i).contains(videoclub.get(titulo).getTitulo())) {
+			if (reservas.get(i).contains(videoclub.get(titulo-1).getTitulo())) {
 				System.out.println(i);
 				comprobar=true;
 			}
 		}
 		if (comprobar==false) {
-			System.out.println("Esta pelicula no esta reservada");
+			System.out.println("Esta pelicula no tiene reservas");
 		}
 	}
 	
 	public void verReserva(HashMap <String,String> reservas,ArrayList <Pelicula> videoclub,ArrayList <Socio> miembros) {
-		Scanner input=new Scanner(System.in);
-		System.out.println();
-		System.out.println("  1) Buscar por socio");
-		System.out.println("  2) Buscar por pelicula");
-		System.out.print("¿Qué tipo de busqueda quieres realizar? ");
-		int opcion=input.nextInt();
-		switch(opcion) {
-			case 1:
-				System.out.println();
-				listarMiembro(miembros);
-				System.out.print("¿Qué miembro quieres comprobar si tiene reservas?(Precaución: Key Sensitive) ");
-				String nombre=input.nextLine();
-				mostrarReservaCliente(reservas,nombre);break;
-			case 2:
-				System.out.println();
-				listarTodas(videoclub);
-				System.out.print("¿Qué pelicula quieres comprobar si tiene reservas? ");
-				int titulo=input.nextInt();
-				mostrarReservaPelicula(reservas,titulo,videoclub);	
+		if (videoclub.size()==0) {
+			System.out.println("No hay ninguna pelicula en el videoclub");
+		} else {
+			System.out.println();
+			System.out.println("  1) Buscar por socio");
+			System.out.println("  2) Buscar por pelicula");
+			System.out.print("¿Qué tipo de busqueda quieres realizar? ");
+			int opcion=input.nextInt();
+			input.nextLine();
+			switch(opcion) {
+				case 1:
+					System.out.println();
+					listarMiembro(miembros);
+					System.out.print("¿Qué miembro quieres comprobar si tiene reservas?(Precaución: Key Sensitive) ");
+					String nombre=input.nextLine();
+					mostrarReservaCliente(reservas,nombre);break;
+				case 2:
+					System.out.println();
+					listarTodas(videoclub);
+					System.out.print("¿Qué pelicula quieres comprobar si tiene reservas? ");
+					int titulo=input.nextInt();
+					mostrarReservaPelicula(reservas,titulo,videoclub);break;
+			}
 		}
 	}
 }

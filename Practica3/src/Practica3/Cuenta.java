@@ -151,7 +151,9 @@ public class Cuenta {
 		boolean menu=true;
 		System.out.println();
 		while(menu==true) {
-			System.out.println("---------- Cajero Automatico ----------");
+			System.out.println("=======================================");
+			System.out.println("|          Cajero Automatico          |");
+			System.out.println("=======================================");
 			System.out.println("|                                     |");
 			System.out.println("|   1) Ingresar dinero                |");
 			System.out.println("|   2) Retirar dinero                 |");
@@ -162,7 +164,7 @@ public class Cuenta {
 				System.out.println("|  9999) Crear una nueva cuenta       |");
 			}
 			System.out.println("|                                     |");
-			System.out.println("---------------------------------------");
+			System.out.println("=======================================");
 			System.out.println();
 			System.out.print("Que operación deseas hacer? ");
 			int opcion=input.nextInt();
@@ -178,9 +180,12 @@ public class Cuenta {
 				case 5:
 					menu=false;break;
 				case 9999:
-					añadirPersona(lista);break;
-			}
+					if (this.getNumCuenta().equals("0")) {
+						añadirPersona(lista);break;
+					}
+				default:
+					System.out.println("¡ERROR! Operacion no valida");
 			}
 		}
-	
+	}
 }
