@@ -11,7 +11,7 @@ public class Main {
 			System.out.println("Practica "+(i+1));
 		}
 		System.out.print("Que practica quieres ver? ");
-		int opcion=input.nextInt();
+		int opcion=Integer.parseInt(input.nextLine());
 		switch(opcion) {
 			case 1: ej1.leer(); break;
 			case 2: ej2.leerInverso(); break;
@@ -22,5 +22,4 @@ public class Main {
 		}
 		input.close();
 	}
-
 }

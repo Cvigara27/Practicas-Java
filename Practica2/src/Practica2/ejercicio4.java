@@ -8,7 +8,6 @@ public class ejercicio4 {
 		int[][] tabla2=new int[3][3];
 		int[][] tabla3=new int[3][3];
 		int i,k;
-		System.out.println("Tener 2 matrices de 3x3 y sumar los valores");
 		for (i=0; i<tabla1.length; i++) {
 			for (k=0; k<tabla1[i].length; k++) {
 				System.out.println("Rellenando tabla1["+i+"]["+k+"]...");

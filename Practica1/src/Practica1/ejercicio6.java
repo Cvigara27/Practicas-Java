@@ -8,15 +8,14 @@ public class ejercicio6 {
 		int[] serie1=new int[12];
 		int[] serie2=new int[12];
 		int[] serie3=new int[24];
-		System.out.println("Leer dos series de numeros devolverlas en orden:1A,2A,3A,1B,2B,3B,4A...");
 		for (i=0; i<serie1.length; i++) {
 			System.out.print("Primera serie, escribe un número: ");
-			int numero=input.nextInt();
+			int numero=Integer.parseInt(input.nextLine());
 			serie1[i]=numero;
 		}
 		for (i=0; i<serie2.length; i++) {
 			System.out.print("Segunda serie, escribe un número: ");
-			int numero=input.nextInt();
+			int numero=Integer.parseInt(input.nextLine());
 			serie2[i]=numero;
 		}
 		int contar=0,inc=0;

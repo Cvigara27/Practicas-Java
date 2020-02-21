@@ -11,7 +11,7 @@ public class Main {
 			System.out.println("Practica "+(i+2));
 		}
 		System.out.print("Que practica quieres ver? ");
-		int opcion=input.nextInt();
+		int opcion=Integer.parseInt(input.nextLine());
 		switch(opcion) {
 			case 2: ej2.tablaIncremento(); break;
 			case 3: ej3.simetrica(); break;

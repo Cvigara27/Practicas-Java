@@ -3,11 +3,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 public class Socio extends Pelicula{
+	//ATRIBUTOS
 	private String nombre;
 	private String numSocio;
 	private String contraseña;
 	static Scanner input=new Scanner(System.in);
 	
+	
+	//CONSTRUCTOR
 	public Socio(String nombre, String numSocio, String contraseña, ArrayList<Socio> lista) {
 		this.setNombre(nombre);
 		this.setNumSocio(numSocio);
@@ -15,12 +18,8 @@ public class Socio extends Pelicula{
 		lista.add(this);
 	}
 	
-	public Socio(String nombre, String numSocio, String contraseña) {
-		this.setNombre(nombre);
-		this.setNumSocio(numSocio);
-		this.setContraseña(contraseña);
-	}
-
+	
+	//GETTERS Y SETTERS
 	public String getNombre() {
 		return nombre;
 	}
@@ -45,16 +44,19 @@ public class Socio extends Pelicula{
 		this.contraseña = contraseña;
 	}
 	
+	
+	//METODOS
 	public void añadirPersona(ArrayList<Socio> lista) {
 		System.out.print("Escribe tu nombre: ");
 		String nombre=ponerMayus(input.nextLine());
 		System.out.print("Escribe tu contraseña: ");
 		String contraseña=input.nextLine();
 		String cuenta=Integer.toString(lista.size());
-		Socio persona=new Socio(nombre,cuenta,contraseña);
-		lista.add(persona);
+		Socio persona=new Socio(nombre,cuenta,contraseña,lista);
 	}
 	
+	
+	//MENU PRINCIPAL
 	public void videoclub(ArrayList <Pelicula> videoclub,HashMap <String,String> reservas, String nombre, ArrayList <Socio> miembros) {
 		boolean menu=true;
 		System.out.println();
@@ -68,14 +70,14 @@ public class Socio extends Pelicula{
 			System.out.println("|  3) Buscar pelicula            |");
 			System.out.println("|  4) Ver reservas               |");
 			System.out.println("|  5) Salir                      |");
+			//Si es la cuenta administradora, en este caso 0
 			if (this.getNumSocio().equals("0")) {
 				System.out.println("|  9999) Crear una nueva cuenta  |");
 			}
 			System.out.println("|                                |");
 			System.out.println("==================================");
 			System.out.print("¿Qué opción deseas? ");
-			int opcion=input.nextInt();
-			input.nextLine();
+			int opcion=Integer.parseInt(input.nextLine());
 			switch(opcion) {
 				case 1:
 					añadirPelicula(videoclub);break;

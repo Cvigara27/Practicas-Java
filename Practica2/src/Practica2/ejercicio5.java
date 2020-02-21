@@ -4,7 +4,6 @@ public class ejercicio5 {
 		//Crear una tabla 7x7, que la diagonal sea 1 y el resto 0
 		int[][] tabla=new int[7][7];
 		int i,k;
-		System.out.println("Crear una tabla 7x7, que la diagonal sea 1 y el resto 0");
 		int contar=0;
 		for (i=0; i<tabla.length; i++) {
 			for (k=0; k<tabla.length; k++) {

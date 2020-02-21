@@ -4,11 +4,10 @@ public class ejercicio7 {
 	public void marcoDinamico() {
 		//Crear una matriz con dimensiones dadas por \nel usuario y que el marco sean 1
 		Scanner input=new Scanner(System.in);
-		System.out.println("Crear una matriz con dimensiones dadas por \nel usuario y que el marco sean 1");
 		System.out.println("Introduzca el numero de columnas");
-		int colum=input.nextInt();
+		int colum=Integer.parseInt(input.nextLine());
 		System.out.println("Introduzca el numero de filas");
-		int filas=input.nextInt();
+		int filas=Integer.parseInt(input.nextLine());
 		int[][] tabla=new int[filas][colum];
 		int i,k;
 		int contar=0;
