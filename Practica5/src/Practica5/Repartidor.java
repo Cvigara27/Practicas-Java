@@ -9,7 +9,7 @@ final public class Repartidor extends Empleado{
 	
 	//CONSTRUCTORES
 	public Repartidor(String nombre, String apellido1, String apellido2, String nif, int edad, float salario, int horasTrabajadas, String zona) {
-		super(nombre, apellido1, apellido2, nif, edad, salario);
+		super(nombre, nif, apellido1, apellido2, edad, salario);
 		this.setHorasTrabajadas(horasTrabajadas);
 		this.setZona(zona);
 	}
