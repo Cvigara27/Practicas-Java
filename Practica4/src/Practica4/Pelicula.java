@@ -13,10 +13,11 @@ public class Pelicula {
 	private boolean disponibilidad;
 	private int copiasTotal;
 	private int copiaReservada;
-	//Contiene la cantidad de copias totales dentro del videoclub
+	//CONTIENE LA CANTIDAD DE COPIAS TOTALES DENTRO DEL VIDEOCLUB
 	private int cantidadPelis=0;
 	final int capacidad=3000;
 	static Scanner input=new Scanner(System.in);
+	
 	
 	//CONSTRUCTORES
 	public Pelicula(int id, String titulo, String director, int duracion, String genero, int año,boolean disponibilidad,int copiasTotal,int copiaReservada) {
@@ -33,6 +34,7 @@ public class Pelicula {
 	
 	public Pelicula() {
 	}
+	
 	
 	//GETTERS Y SETTERS
 	public int getId() {
@@ -122,14 +124,11 @@ public class Pelicula {
 	
 	//METODOS
 	public String ponerMayus(String cadena) {
-		//Pone la primera letra en mayuscula y el resto en minusculas
+		//PONE LA PRIMERA LETRA EN MAYUSCULAS Y EL RESTO EN MINUSCULAS
 		int i;
 		cadena.toLowerCase();
 		String[] uppers=cadena.split(" ");
 		for (i=0; i<uppers.length; i++) {
-			if(uppers[i]==("l" )) {
-				
-			}
 			String mayus=uppers[i].substring(0,1).toUpperCase();
 			mayus=mayus+uppers[i].substring(1);
 			uppers[i]=mayus;
@@ -143,11 +142,11 @@ public class Pelicula {
 	
 	
 	public void añadirPelicula(ArrayList <Pelicula> videoclub) {
-		//Si el videoclub esta lleno da error
+		//SI EL VIDEOCLUB ESTA LLENO DA ERROR
 		if (cantidadPelis>=capacidad) {
 			System.out.println("!ERROR¡ El videoclub no puede almacenar más películas");
 		} else {
-			//Pide información de la pelicula
+			//PIDE INFORMACION DE LA PELICULA
 			System.out.print("Introduzca el titulo de la pelicula: ");
 			String title=ponerMayus(input.nextLine());
 			System.out.print("Introduzca el director: ");
@@ -161,7 +160,7 @@ public class Pelicula {
 			System.out.print("Introduzca el numero de copias: ");
 			int amount=Integer.parseInt(input.nextLine());
 			if((cantidadPelis+amount)>capacidad) {
-				//Si la cantidad de copias que quiere añadir superan la capacidad del videoclub
+				//SI LA CANTIDAD DE COPIAS QUE QUIERE AÑADIR SUPERAN LA CAPACIDAD DEL VIDEOCLUB
 				System.out.println("!ERROR¡ El videoclub no puede almacenar tantas películas");
 			} else {
 				Pelicula peli=new Pelicula(id,title,direc,duracion,genre,year,true,amount,0);
@@ -174,7 +173,7 @@ public class Pelicula {
 	
 	
 	public void listarPelicula(ArrayList <Pelicula> videoclub,int i) {
-		//Enseña una pelicula indicada por int i
+		//ENSEÑA UNA PELICULA ESPECIFICA INDICADA POR int i
 		System.out.println("ID: "+videoclub.get(i).getId()+"   Titulo: "+videoclub.get(i).getTitulo()+"   Director: "+videoclub.get(i).getDirector());
 		System.out.println("Duracion: "+videoclub.get(i).getDuracion()+" minutos   Genero: "+videoclub.get(i).getGenero());
 		if(videoclub.get(i).getDisponibilidad()==true){
@@ -187,7 +186,7 @@ public class Pelicula {
 	
 	
 	public void listarTodas(ArrayList <Pelicula> videoclub) {
-		//Enseña todas las peliculas
+		//ESNEÑA TODAS LAS PELICULAS
 		System.out.println("===========================");
 		System.out.println("|   Lista de peliculas    |");
 		System.out.println("===========================");
@@ -207,37 +206,37 @@ public class Pelicula {
 	
 	public void reservarPelicula(ArrayList <Pelicula> videoclub,HashMap <String, String> reservas,String nombre) {
 		if(videoclub.size()==0) {
-			//Si el videoclub esta vacio
+			//SI EL VIDEOCLUB ESTA VACIO
 			System.out.println("No hay ninguna pelicula en el videoclub");
 		}else {
 			listarTodas(videoclub);
 			System.out.print("¿Qué pelicula quieres reservar(ID)? ");
 			int opcion=Integer.parseInt(input.nextLine());
-			//Si la pelicula no existe
+			//SI LA PELICULA NO EXISTE
 			if(opcion>videoclub.size() || opcion<0) {
 				System.out.println("La película seleccionada no existe");
 			} 
-			//Si no esta disponible
+			//SI NO ESTA DISPONIBLE
 			else if(videoclub.get(opcion-1).getDisponibilidad()==false) {
 				System.out.println("La pelicula no esta disponible");
-			} 
-			//Si esta disponible
+			}
+			//SI ESTA DISPONIBLE
 			else if (videoclub.get(opcion-1).getDisponibilidad()==true) {
 				System.out.println("Se ha reservado su pelicula");
-				//Se añade 1 al numero de reservas de la pelicula
+				//SE AÑADE 1 AL NUMEOR DE RESERVAS DE LA PELICULA
 				int num=videoclub.get(opcion-1).getCopiaReservada();
 				num+=1;
 				videoclub.get(opcion-1).setCopiaReservada(num);
-				//Si hay tantas reservas como copias de la pelicula
+				//SI HAY TANTAS RESERVAS COMO COPIAS DE LA PELICULA
 				if(videoclub.get(opcion-1).getCopiaReservada()==videoclub.get(opcion-1).getCopiasTotal()) {
 					videoclub.get(opcion-1).setDisponibilidad(false);
 				}
-				//Comprueba si el cliente ya tiene alguna reservas y añade la nueva pelicula a sus reservas
+				//COMPRUEBA SI EL CLIENTE YA TIENE ALGUNA RESERVA Y AÑADE LA NUEVA PELICULA A SUS RESERVAS
 				if (reservas.containsKey(nombre)) {
 					String newValue=reservas.get(nombre)+", "+videoclub.get(opcion-1).getTitulo();
 					reservas.put(nombre, newValue);
 				} 
-				//Se añade el cliente a un diccionario para saber sus reservas
+				//SE AÑADE EL CLIENTE A UN DICCIONARIO(HASHMAP) PARA SABER SUS RESERVAS
 				else {
 					reservas.put(nombre, videoclub.get(opcion-1).getTitulo());
 				}				
@@ -247,9 +246,9 @@ public class Pelicula {
 		
 	
 	public void buscarPelicula(ArrayList <Pelicula> videoclub) {
-		//Sub-menu de busqueda
+		//SUB-MENU DE BUSQUEDA
 		int i;
-		//Comprueba si hay alguna coincidencia
+		//COMPRUEBA SI HAY ALGUNA COINCIDENCIA
 		boolean comprobar=false;
 		if(videoclub.size()==0) {
 			System.out.println("No hay ninguna pelicula en el videoclub");
@@ -265,7 +264,7 @@ public class Pelicula {
 			input.nextLine();
 			switch(opcion) {
 				case 1:
-					//Busqueda por titulo
+					//BUSQUEDA POR TITULO
 					System.out.print("¿Qué título quieres buscar? ");
 					String titulo=input.nextLine().toLowerCase();
 					System.out.println("===========================");
@@ -277,12 +276,12 @@ public class Pelicula {
 							comprobar=true;
 						}
 					}
-					//Si no se encuentra nada
+					//SI NO SE ENCUENTRA NADA
 					if (comprobar==false) {
 						System.out.println("No se ha encontrado ninguna coincidencia");
 					};break;
 				case 2:
-					//Busqueda por director
+					//BUSQUEDA POR DIRECTOR
 					System.out.print("¿Qué director quieres buscar? ");
 					String direc=input.nextLine().toLowerCase();
 					System.out.println("===========================");
@@ -294,12 +293,12 @@ public class Pelicula {
 							comprobar=true;
 						}
 					}
-					//Si no se encuentra nada
+					//SI NO SE ENCUENTRA NADA
 					if (comprobar==false) {
 						System.out.println("No se ha encontrado ninguna coincidencia");
 					};break;
 				case 3:
-					//Busqueda por genero
+					//BUSQUEDA POR GENERO
 					System.out.print("¿Qué género quieres buscar? ");
 					String genre=input.nextLine().toLowerCase();
 					System.out.println("===========================");
@@ -311,17 +310,17 @@ public class Pelicula {
 							comprobar=true;
 						}
 					}
-					//Si no se encuentra nada
+					//SI NO SE ENCUENTRA NADA
 					if (comprobar==false) {
 						System.out.println("No se ha encontrado ninguna coincidencia");
 					};break;
 				case 4:
-					//Busqueda por año
+					//BUSQUEDA POR AÑO
 					System.out.print("¿Qué año quieres buscar? ");
 					int year=Integer.parseInt(input.nextLine());
 					mayorMenor(year,videoclub,true);break;
 				case 5:
-					//Busqueda por duracion
+					//BUSQUEDA POR DURACION
 					System.out.print("¿Qué duración quieres buscar(minutos)? ");
 					int time=Integer.parseInt(input.nextLine());
 					mayorMenor(time,videoclub,false);break;
@@ -331,10 +330,10 @@ public class Pelicula {
 	
 	
 	public void mayorMenor(int opcion,ArrayList <Pelicula> videoclub,boolean añoTime) {
-		//Metodo de busqueda por año y duracion  ya que hacen lo mismo
-		//boolean añoTime es para diferenciar si se busca por año o por duracion
+		//METODO DE BUSQUEDA POR AÑO Y DURACION YA QUE HACEN LO MISMO
+		//boolean añoTime ES PARA DIFERENCIAR SI SE BUSCA POR AÑO O POR DURACION
 		int i;
-		//Comprueba si hay algun resultado
+		//COMPRUEBA SI HAY ALGUN RESULTADO
 		boolean comprobar=false;
 		System.out.println();
 		System.out.println("  1) Mayor que...");
@@ -344,7 +343,7 @@ public class Pelicula {
 		int eleccion=Integer.parseInt(input.nextLine());
 		switch(eleccion){
 			case 1:
-				//Busqueda mayor al numero insertado
+				//BUSQUEDA MAYOR AL NUMERO INSERTADO
 				System.out.println("===========================");
 				System.out.println("|   Lista de peliculas    |");
 				System.out.println("===========================");
@@ -361,12 +360,12 @@ public class Pelicula {
 						}
 					}
 				}
-				//Si no encuentra nada
+				//SI NO SE ENCUENTRA NADA
 				if (comprobar==false) {
 					System.out.println("No se ha encontrado ninguna coincidencia");
 				};break;
 			case 2:
-				//Buscar una cantidad exacta
+				//BUSCAR UNA CANTIDAD EXACTA
 				System.out.println("===========================");
 				System.out.println("|   Lista de peliculas    |");
 				System.out.println("===========================");
@@ -383,12 +382,12 @@ public class Pelicula {
 						}
 					}
 				}
-				//Si no encuentra nada
+				//SI NO SE ENCUENTRA NADA
 				if (comprobar==false) {
 					System.out.println("No se ha encontrado ninguna coincidencia");
 				};break;
 			case 3:
-				//Cantidad menor a la dada
+				//BUSCAR UN NUMERO MENOR AL INSERTADO
 				System.out.println("===========================");
 				System.out.println("|   Lista de peliculas    |");
 				System.out.println("===========================");
@@ -405,7 +404,7 @@ public class Pelicula {
 						}
 					}
 				}
-				//Si no encuentra nada
+				//SI NO SE ENCUENTRA NADA
 				if (comprobar==false) {
 					System.out.println("No se ha encontrado ninguna coincidencia");
 				};break;
@@ -414,7 +413,7 @@ public class Pelicula {
 	
 	
 	public void listarMiembro(ArrayList <Socio> miembros) {
-		//Enseña todos los socios
+		//ENSEÑA TODOS LOS SOCIOS
 		int i;
 		System.out.println("===========================");
 		System.out.println("|     Lista de socios     |");
@@ -426,8 +425,8 @@ public class Pelicula {
 	
 	
 	public void mostrarReservaCliente(HashMap <String,String> reservas,String nombre) {
-		//Muestra las reservas de un cliente
-		//Comprueba si esta en la lista de reservas
+		//MUESTRA LAS RESERVAS DE UN CLIENTE
+		//COMPRUEBA SI ESTA EN LA LISTA DE RESERVAS
 		if (reservas.containsKey(nombre)==false) {
 			System.out.println("El cliente no tiene ninguna reserva");
 		} else {
@@ -438,7 +437,7 @@ public class Pelicula {
 	
 	
 	public void mostrarReservaPelicula(HashMap <String,String> reservas,int titulo,ArrayList <Pelicula> videoclub) {
-		//Muestra los cliente que tienen una pelicula reservada
+		//MUESTRA LOS CLIENTE QUE TIENEN UNA PELICULA RESERVADA
 		boolean comprobar=false;
 		for (String i : reservas.keySet()) {
 			if (reservas.get(i).contains(videoclub.get(titulo-1).getTitulo())) {
@@ -446,7 +445,7 @@ public class Pelicula {
 				comprobar=true;
 			}
 		}
-		//Si no esta reservada
+		//SI NO ESTA RESERVADA
 		if (comprobar==false) {
 			System.out.println("Esta pelicula no tiene reservas");
 		}
@@ -454,7 +453,8 @@ public class Pelicula {
 	
 	
 	public void verReserva(HashMap <String,String> reservas,ArrayList <Pelicula> videoclub,ArrayList <Socio> miembros) {
-		//Si esta vacio el videoclub
+		//MUESTRA LAS RESERVAS QUE HAY
+		//SI EL VIDEOCLUB ESTA VACIO
 		if (videoclub.size()==0) {
 			System.out.println("No hay ninguna pelicula en el videoclub");
 		} else {
@@ -466,14 +466,14 @@ public class Pelicula {
 			input.nextLine();
 			switch(opcion) {
 				case 1:
-					//Buscar por socio
+					//BUSCAR POR SOCIO
 					System.out.println();
 					listarMiembro(miembros);
 					System.out.print("¿Qué miembro quieres comprobar si tiene reservas?(Precaución: Key Sensitive) ");
 					String nombre=input.nextLine();
 					mostrarReservaCliente(reservas,nombre);break;
 				case 2:
-					//Buscar por pelicula
+					//BUSCAR POR PELICULA
 					System.out.println();
 					listarTodas(videoclub);
 					System.out.print("¿Qué pelicula quieres comprobar si tiene reservas? ");

@@ -47,6 +47,7 @@ public class Socio extends Pelicula{
 	
 	//METODOS
 	public void añadirPersona(ArrayList<Socio> lista) {
+		//AÑADE UNA NUEVA PERSONA
 		System.out.print("Escribe tu nombre: ");
 		String nombre=ponerMayus(input.nextLine());
 		System.out.print("Escribe tu contraseña: ");
@@ -70,7 +71,7 @@ public class Socio extends Pelicula{
 			System.out.println("|  3) Buscar pelicula            |");
 			System.out.println("|  4) Ver reservas               |");
 			System.out.println("|  5) Salir                      |");
-			//Si es la cuenta administradora, en este caso 0
+			//SI ES LA CUENTA ADMINISTRADORE, EN ESTE CASO 0
 			if (this.getNumSocio().equals("0")) {
 				System.out.println("|  9999) Crear una nueva cuenta  |");
 			}

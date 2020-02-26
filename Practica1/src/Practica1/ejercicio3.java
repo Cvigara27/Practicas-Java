@@ -8,7 +8,7 @@ public class ejercicio3 {
 		int mediapos=0,contarpos=0,medianeg=0,contarneg=0,contarc=0;
 		for (i=0; i<5; i++) {
 			System.out.print("Introduzca un número: ");
-			int numero=Integer.parseInt(input.nextline());
+			int numero=Integer.parseInt(input.nextLine());
 			if (numero<0) {
 				medianeg+=numero;
 				contarneg++;

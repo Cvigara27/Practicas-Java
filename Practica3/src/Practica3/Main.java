@@ -11,16 +11,16 @@ public class Main {
 		boolean login=false;
 		while (login==false) {
 			boolean account=false;boolean passw=false;
-			//count es para que no haya mas de 3 intentos
+			///COUNT ES PARA QUE NO HAYA MAS DE 3 INTENTOS
 			int count=0;
-			//idAccount es para quedarse con la posicion de la cuenta comprobada
+			//idAccount ES PARA QUEDARSE CON LA POSICION DE LA CUENTA COMPROBADA
 			int idAccount=0;
 			while (account==false) {
-				//Pide el nº de cuenta
+				//PIDE EL Nº DE CUENTA
 				System.out.println();
 				System.out.print("Nº de Cuenta: ");
 				String acc=input.nextLine().toUpperCase();
-				//Si escribe salir cierra el programa
+				//SI ESCRIBE SALIR CIERRA EL PROGRAMA
 				if (acc.equals(salida)) {
 					account=true;
 					passw=true;
@@ -28,7 +28,7 @@ public class Main {
 				}
 				int i=0;
 				boolean comprobar=false;
-				//Comprueba la lista para ver si existe la cuenta
+				//COMPRUBEA LA LISTA PARA VER SI EXISTE LA CUENTA
 				while(i<cuentas.size() && comprobar==false) {
 					if (acc.equals(cuentas.get(i).getNumCuenta())) {
 						account=true;
@@ -39,16 +39,16 @@ public class Main {
 				}
 			}
 			while (passw==false && count<3) {
-				//Pide la constraseña de la cuenta ya comprobada
+				//PIDE LA CONTRASEÑA DE AL CUENTA YA COMPROBADA
 				System.out.println();
 				System.out.print("Contraseña: ");
 				String pass=input.nextLine().toUpperCase();
-				//Si escribe salir cierra el programa
+				//SI ESCRIBE SALIR CIERRA EL PROGRAMA
 				if (pass.equals(salida)) {
 					passw=true;
 					login=true;
 				}
-				//Comprueba que la cuenta tenga la contraseña 
+				//COMPRUEBA QUE LA CUENTA TENGA LA CONSTRASEÑA INDICADA
 				if (pass.equals(cuentas.get(idAccount).getContraseña().toUpperCase())) {
 					System.out.println("Bienvenido "+cuentas.get(idAccount).getNombre());
 					cuentas.get(idAccount).cajero(cuentas);
@@ -56,7 +56,7 @@ public class Main {
 				}
 				count++;
 			}
-			//Si hay mas de tres fallos vuelve a pedir la cuenta
+			//SI HAY MAS DE TRES FALLOS VUELBE A PEDIR EL SOCIO
 			if(count==3) {
 				System.out.println("Demasiados intentos fallidos");
 			} 

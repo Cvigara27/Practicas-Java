@@ -58,7 +58,7 @@ public class Cuenta {
 		boolean comprobar=false;
 		System.out.println("Cuanto quieres ingresar?");
 		double introducir = Double.parseDouble(input.nextLine());
-		//Si se introduce una cantidad menor o igual a cero saca un ¡ERROR!
+		//SI SE INTRODUCE UNA CANTIDAD MENOR O IGUAL A CERO SACA UN ¡ERROR!
 		if (introducir<=0 ) {
 			System.out.println("¡ERROR! Operación no valida");
 		} else {
@@ -73,7 +73,7 @@ public class Cuenta {
 		boolean comprobar=false;
 		System.out.println("Cuanto quieres retirar?");
 		double reintegro = Double.parseDouble(input.nextLine());
-		//Si saca una cantidad de cero o menos o una cantidad mayor a su saldo saca un ¡ERROR!
+		//SI SACE UNA CANTIDAD DE CERO O MENOS O UNA CANTIDAD MAYOR A SU SALDO SACA UN ¡ERROR!
 		if (reintegro<=0 || reintegro>this.getSaldo()) {
 			System.out.println("¡ERROR! Operación no valida");
 		} else {
@@ -85,18 +85,18 @@ public class Cuenta {
 	
 	
 	public void transferirDinero(ArrayList<Cuenta> lista) {
-		//Para comprobar si existe la cuenta
+		//PARA COMPROBAR SI EXISTE LA CUENTA
 		boolean numcuenta=false;
-		//Para comprobar que se tiene que hacer la transferencia
+		//PARA COMPROBAR QUE SE TIENE QUE HACER LA TRANSFERENCIA
 		boolean transfer=true;
-		//Para guardar la posicion del destinatario si existe
+		//PARA GUARDAR LA POSICION DEL DESTINATARIO SI EXISTE
 		int idAccount = 0;
 		while(numcuenta==false) {
-			//Pide la cuenta destino de la transferencia
+			//PIDE LA CUENTA DESTINO DE LA TRANSFERENCIA
 			System.out.print("Introduzca el numero de cuenta destino: ");
 			String numacc=input.nextLine();
 			int i=0;
-			//Comprueba que existe el destinatario
+			//COMPRIEBA QUE EXISTE EL DESTINATARIO
 			while(i<lista.size() && numcuenta==false) {
 				if (numacc.equals(lista.get(i).getNumCuenta())) {
 					idAccount=i;
@@ -104,7 +104,7 @@ public class Cuenta {
 				}
 				i++;
 			}
-			//Si no encuentra la cuenta permite abandonar o pedir otra cuenta
+			//SO NO ENCUENTRA LA CUENTA PERMITE ABANDONAR O PEDIR OTRA CUENTA
 			if(numcuenta==false) {
 				System.out.println("El numero de cuenta no existe");
 				System.out.println("Presione ENTER para probar otra vez o escriba SALIR para finalizar el tramite");
@@ -116,14 +116,14 @@ public class Cuenta {
 			}
 		}
 		if(transfer==true) {
-			//Pide la cantidad a transferir
+			//PIDE LA CANTIDAD A TRANSFERIR
 			System.out.print("Cuanto quieres transferir: ");
 			double transferir = Double.parseDouble(input.nextLine());
-			//Si saca una cantidad de cero o menos o una cantidad mayor a su saldo saca un ¡ERROR!
+			//SI SACE UNA CANTIDAD DE CERO O MENOS O UNA CANTIDAD MAYOR A SU SALDO SACA UN ¡ERROR!
 			if (transferir<=0 || transferir>this.getSaldo()) {
 				System.out.println("¡ERROR! Operación no valida");
 			} else {
-				//Reduce el saldo de quien transfiere y se aumenta el del destinatario
+				//REDUCE EL SALDO DE QUIEN TRANSFIERE Y SE AUMENTA EL DEL DESTINATARIO
 				this.setSaldo(saldo-transferir);
 				lista.get(idAccount).setSaldo(lista.get(idAccount).getSaldo()+transferir);
 			}
@@ -133,7 +133,7 @@ public class Cuenta {
 	
 	public static void verCuentas(ArrayList <Cuenta> lista) {
 		int i;
-		//Enseña todas las cuentas
+		//ENSEÑA TODAS LAS CUENTAS
 		System.out.println("NumCuenta/Nombre/saldo");
 		for(i=0;i<lista.size();i++) {
 			System.out.println(lista.get(i).getNumCuenta()+"/"+lista.get(i).getNombre()+"/"+lista.get(i).getSaldo());
@@ -142,7 +142,7 @@ public class Cuenta {
 	
 	
 	public static void añadirPersona(ArrayList<Cuenta> lista) {
-		//Pide informacion de la nueva persona
+		//PIDE INFORMACION DE LA NUEVA PERSONA
 		System.out.print("Escribe tu nombre: ");
 		String nombre=input.nextLine();
 		System.out.print("Escribe tu contraseña: ");
@@ -156,7 +156,7 @@ public class Cuenta {
 			saldo=Double.parseDouble(input.nextLine());
 		}
 		String cuenta=Integer.toString(lista.size());
-		//Crea y añade la persona al grupo de cuentas
+		//CREA Y AÑADE LA PERSONA AL GRUPO DE CUENTAS
 		Cuenta persona=new Cuenta(nombre,cuenta,saldo,contraseña,lista);
 	}
 	
@@ -175,7 +175,7 @@ public class Cuenta {
 			System.out.println("|   3) Realizar una trasnferencia     |");
 			System.out.println("|   4) Ver todos las cuentas          |");
 			System.out.println("|   5) Salir                          |");
-			//Si es la cuenta administradora, en este caso 0
+			//SI ES LA CUENTA ADMINISTRADORA, EN ESTE CASO 0
 			if (this.getNumCuenta().equals("0")) {
 				System.out.println("|   9999) Crear una nueva cuenta      |");
 			}
