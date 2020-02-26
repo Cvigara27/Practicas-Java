@@ -9,7 +9,7 @@ final public class Comercial extends Empleado{
 	
 	//CONSTRUCTORES
 	public Comercial(String nombre, String apellido1, String apellido2, String nif, int edad, float salario, int ventasRealizadas, float comision) {
-		super(nombre, apellido1, apellido2, nif, edad, salario);
+		super(nombre, nif, apellido1, apellido2,  edad, salario);
 		this.setVentasRealizadas(ventasRealizadas);
 		this.setComision(comision);
 	}
