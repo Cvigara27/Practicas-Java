@@ -18,22 +18,60 @@ public class Main {
 			int opcion=Integer.parseInt(input.nextLine());
 			switch(opcion){
 				case 1:
-					double arista=pedirInformacion(" una arista ");
-					Dodecaedro figura=new Dodecaedro(arista);
-					figura.calcularArea();
-					figura.calcularVolumen();
+					try {
+						Dodecaedro figura=new Dodecaedro(pedirInformacion(" una arista "));
+						figura.calcularArea();
+						figura.calcularVolumen();
+					}catch(NumberFormatException e) {
+						System.out.println();
+						System.out.println("Lo introducido no es un numero valido");
+						System.out.println();
+					}catch(RangoNoValidoException e) {
+						e.printStackTrace();
+						System.out.println();
+					}
 					break;
 				case 2:
-					double radio=pedirInformacion("l radio ");
-					Esfera figura2=new Esfera(radio);
-					figura2.calcularArea();
-					figura2.calcularVolumen();
+					try {
+						Esfera figura2=new Esfera(pedirInformacion("l radio "));
+						figura2.calcularArea();
+						figura2.calcularVolumen();
+					}catch(NumberFormatException e) {
+						System.out.println();
+						System.out.println("Lo introducido no es un numero valido");
+						System.out.println();
+					}catch(RangoNoValidoException e) {
+						System.out.print("¿Quieres dejar una nota para una posible mejora del programa? [Y/N] ");
+						e.printStackTrace();
+					}
 					break;
 				case 3: 
-					double arista2=pedirInformacion(" una arista ");
-					Octaedro figura3=new Octaedro(arista2);
-					figura3.calcularArea();
-					figura3.calcularVolumen();
+					try {
+						Octaedro figura3=new Octaedro(pedirInformacion(" una arista "));
+						figura3.calcularArea();
+						figura3.calcularVolumen();
+					}catch(NumberFormatException e) {
+						System.out.println();
+						System.out.println("Lo introducido no es un numero valido");
+						System.out.println();
+					}catch(RangoNoValidoException e) {
+						System.out.print("¿Quieres dejar una nota para una posible mejora del programa? [Y/N] ");
+						e.printStackTrace();
+					}
+					break;
+				case 4:
+					try {
+						Icosaedro figura4=new Icosaedro(pedirInformacion(" una arista "));
+						figura4.calcularArea();
+						figura4.calcularVolumen();
+					}catch(NumberFormatException e) {
+						System.out.println();
+						System.out.println("Lo introducido no es un numero valido");
+						System.out.println();
+					}catch(RangoNoValidoException e) {
+						System.out.print("¿Quieres dejar una nota para una posible mejora del programa? [Y/N] ");
+						e.printStackTrace();
+					}
 					break;
 				case 5:
 					menu=false;
@@ -44,10 +82,13 @@ public class Main {
 		}
 	}
 	
-	public static double pedirInformacion(String cosa) {
+	public static double pedirInformacion(String cosa) throws RangoNoValidoException {
 		Scanner input=new Scanner(System.in);
 		System.out.print ("Introduce el valor de"+cosa);
 		double variable=Double.parseDouble(input.nextLine());
+		if (variable<=0) {
+			throw new RangoNoValidoException();
+		}
 		return variable;
 	}
 }
